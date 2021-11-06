@@ -1,10 +1,13 @@
 {
-  "name": "INDES-backend",
+  "name": "indes-backend",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/wisnu-aji/INDES-backend.git",
   "author": "awx <callmeoniichandesu@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "express": "^4.17.1"
   }
