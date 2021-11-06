@@ -7,5 +7,8 @@ app.get("/status/:nama", (req, res) => {
   console.log(id);
   res.json({ status: "OK" });
 });
-
+app.get("/data/:nama", (req, res) => {
+  const nama = req.params.nama;
+  res.json({ status: "OK", nama, waktu: new Date() });
+});
 app.listen(port);
