@@ -6,8 +6,9 @@
   "author": "awx <callmeoniichandesu@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
+    "start": "node build/index.js",
     "build": "tsc",
+    "postinstall": "yarn build",
     "dev": "nodemon -r dotenv/config src/index.ts",
     "format": "prettier -w './src/**/**.*{ts,json}'"
   },
