@@ -15,3 +15,5 @@ const AdminSchema = new Schema<AdminType>({
     type: String,
   },
 })
+
+export const Admin = model('Admin', AdminSchema)

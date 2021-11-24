@@ -14,7 +14,7 @@ const PelangganSchema = new Schema<PelangganType>({
     required: true,
     type: String,
   },
-  telpon: {
+  telepon: {
     required: true,
     type: Number,
   },

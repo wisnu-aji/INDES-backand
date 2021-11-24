@@ -15,9 +15,11 @@ declare module 'indes-typings' {
     _id: number
     nama: string
     alamat: string
-    telpon: number
+    telepon: number
     paket: number
     pemasangan: Date
     batasPembayaran: Date
   }
+
+  export type User = Omit<PelangganType, "_id">
 }
