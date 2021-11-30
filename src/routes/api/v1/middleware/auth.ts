@@ -5,9 +5,9 @@ export const auth = async (
   res: Response,
   next: NextFunction
 ) => {
-  const key = req.header('set-cookie')
-
+  const key = req.headers
   // Handling cookie here
+  console.log(key)
 
   next()
 }

@@ -2,10 +2,6 @@ import { Schema, model } from 'mongoose'
 import { AdminType } from 'indes-typings'
 
 const AdminSchema = new Schema<AdminType>({
-  _id: {
-    required: true,
-    type: Number,
-  },
   email: {
     required: true,
     type: String,

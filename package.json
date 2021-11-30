@@ -9,14 +9,17 @@
     "start": "node build/index.js",
     "build": "tsc",
     "postinstall": "yarn build",
-    "dev": "nodemon -r dotenv/config src/index.ts",
+    "dev": "nodemon -r dotenv/config ./src/index.ts",
     "format": "prettier -w './src/**/**.*{ts,json}'"
   },
   "dependencies": {
     "axios": "^0.24.0",
     "express": "^4.17.1",
+    "googleapis": "^91.0.0",
     "is-url": "^1.2.4",
-    "mongoose": "^6.0.13"
+    "mongoose": "^6.0.13",
+    "nanoid": "^3.1.30",
+    "tsconfig-paths": "^3.12.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
