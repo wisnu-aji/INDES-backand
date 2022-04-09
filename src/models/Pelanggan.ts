@@ -17,6 +17,7 @@ const PelangganSchema = new Schema<PelangganType>({
   telepon: {
     required: true,
     type: Number,
+    unique: true,
   },
   paket: {
     required: true,
@@ -31,6 +32,11 @@ const PelangganSchema = new Schema<PelangganType>({
     required: true,
     type: Date,
   },
+  riwayatPembayaran: {
+    required: false,
+    type: [],
+    default: [],
+  },
 })
 
-export const Pelanggan = model('Pelanggan', PelangganSchema)
+export const Pelanggan = model('Pelanggan', PelangganSchema, 'pelanggan')

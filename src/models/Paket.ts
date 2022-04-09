@@ -16,4 +16,4 @@ const PaketSchema = new Schema<PaketType>({
   },
 })
 
-export const Paket = model('Paket', PaketSchema)
+export const Paket = model('Paket', PaketSchema, 'paket')

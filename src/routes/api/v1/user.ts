@@ -5,15 +5,15 @@ import { getBatasPembayaran } from '../../../lib/getBatasPembayaran'
 import { Pelanggan } from '../../../models/Pelanggan'
 const router = Router()
 
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
   try {
     const body = req.body as User
     body.batasPembayaran = getBatasPembayaran(
       new Date(body.pemasangan),
       new Date(body.pemasangan).getDate()
     )
-
-    const save = addNewUser(body)
+    console.log(req.body)
+    const save = await addNewUser(body)
     if (typeof save === 'string') throw new Error(save)
     res.json(save)
   } catch (error: any) {
@@ -40,7 +40,5 @@ router.post('/remove', async (req, res) => {
     res.status(500).json({ ok: false, message: error.message })
   }
 })
-
-
 
 export default router
