@@ -30,7 +30,8 @@ router.get('/:id', async (req, res) => {
 
   const bayar = await linkBayar(pelanggan, paket)
 
-  res.json(bayar)
+  // res.json(bayar)
+  res.redirect(bayar.Data.Url)
 })
 
 export default router
