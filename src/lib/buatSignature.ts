@@ -11,7 +11,7 @@ export const buatSignature = (pelanggan: PelangganType, paket: PaketType) => {
 
   const requestBody = new FormData()
 
-  requestBody.append('product[]', paket.kecepatan)
+  requestBody.append('product[]', `${paket.kecepatan} a/n ${pelanggan.nama}`)
   requestBody.append('qty[]', '1')
   requestBody.append('price[]', paket.harga)
   // requestBody.append('description', 'Pembayaran WiFi')
