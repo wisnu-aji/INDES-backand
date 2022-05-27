@@ -9,7 +9,7 @@ export const linkBayar = async (pelanggan: PelangganType, paket: PaketType) => {
   )
 
   const response = await axios.post(
-    'https://sandbox.ipaymu.com/api/v2/payment',
+   process.env.IPAYMU_URL! + '/api/v2/payment',
     bodyJSON,
     {
       headers: {
