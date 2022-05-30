@@ -7,9 +7,12 @@ import bayarRouter from './bayar'
 import { auth } from './middleware/auth'
 
 const router = Router()
-router.use('/search', auth, searcRouter)
+
 router.use('/admin', auth, adminRouter)
+
 router.use('/user', auth, userRouter)
+
+router.use('/search', searcRouter)
 router.use('/paket', paketRouter)
 router.use('/bayar', bayarRouter)
 export default router
