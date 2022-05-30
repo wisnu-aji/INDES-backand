@@ -12,4 +12,4 @@ const AdminSchema = new Schema<AdminType>({
   },
 })
 
-export const Admin = model('Admin', AdminSchema, 'Admin')
+export const AdminUtama = model('AdminUtama', AdminSchema, 'AdminUtama')
