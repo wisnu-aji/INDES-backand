@@ -15,5 +15,10 @@ export const getBatasPembayaran = (
     nextDate.setDate(tanggalPemasangan)
     nextDate.setMonth(nextMonth - 1)
   }
+  // change nextDate to Jakarta timezone
+  nextDate.setHours(nextDate.getHours() + 7)
+  
   return nextDate
 }
+
+
