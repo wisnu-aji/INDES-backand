@@ -6,6 +6,7 @@ export const addNewUser = async (
 ): Promise<PelangganType | string> => {
   try {
     const isPhoneExist = await Pelanggan.findOne({telepon: props.telepon})
+    if(isPhoneExist) return 'nomor telepon sudah terdaftar'
     const _id = await generateId()
     const data = { _id, ...props }
     const user = new Pelanggan(data)
