@@ -1,5 +1,6 @@
 import { Paket } from '../../../models/Paket'
 import { Router } from 'express'
+import { authAdminUtama } from './middleware/auth'
 
 const router = Router()
 router.get('/', async (req, res) => {
@@ -10,7 +11,7 @@ router.get('/', async (req, res) => {
     res.status(500).json({ ok: false, message: error.message })
   }
 })
-router.post('/add', async (req, res) => {
+router.post('/add', authAdminUtama, async (req, res) => {
   try {
     const data = req.body
 
