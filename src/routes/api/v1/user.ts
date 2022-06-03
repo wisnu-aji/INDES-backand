@@ -104,7 +104,7 @@ router.post('/stat', (req, res) => {
         res.status(500).json({ ok: false, message: err.message })
         return
       }
-      res.json({ count })
+      res.json({ ok: true, count })
     })
   } catch (error: any) {
     res.status(500).json({ ok: false, message: error.message })
