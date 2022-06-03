@@ -101,12 +101,14 @@ router.post('/stat', (req, res) => {
         : {}
     Pelanggan.countDocuments(list, (err, count) => {
       if (err) {
+        console.log(err)
         res.status(500).json({ ok: false, message: err.message })
         return
       }
       res.json({ ok: true, count })
     })
   } catch (error: any) {
+    console.log(error)
     res.status(500).json({ ok: false, message: error.message })
   }
 })
