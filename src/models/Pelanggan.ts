@@ -4,7 +4,7 @@ import { PelangganType } from 'indes-typings'
 const PelangganSchema = new Schema<PelangganType>({
   _id: {
     required: true,
-    type: Number,
+    type: String,
   },
   nama: {
     required: true,
@@ -16,7 +16,7 @@ const PelangganSchema = new Schema<PelangganType>({
   },
   telepon: {
     required: true,
-    type: Number,
+    type: String,
     unique: true,
   },
   paket: {

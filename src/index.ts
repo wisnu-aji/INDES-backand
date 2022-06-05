@@ -21,7 +21,7 @@ export interface UserProfile {
 const app = express()
 app.use(corsOption)
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 app.use('/api/v1', api)
 app.get('/callbacks', async (req, res) => {
   const oauth = oauth2Client()

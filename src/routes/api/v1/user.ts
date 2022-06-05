@@ -36,23 +36,37 @@ interface List {
   limit: number
   sortBy: 'nama' | 'alamat' | 'telepon' | null
   status: 'telat-bayar' | 'sudah-bayar' | null
+  query: string
 }
 
 router.post('/list', async (req, res) => {
   try {
     const body = req.body as List
+    const { query } = body
     const payload =
       body.status === 'telat-bayar'
         ? { batasPembayaran: { $gt: new Date() } }
         : body.status === 'sudah-bayar'
         ? { batasPembayaran: { $lte: new Date() } }
         : {}
-    const sortPayload = body.sortBy ? { [body.sortBy]: 1 } : {}
-    const list = await Pelanggan.find(payload)
+
+    const sortPayload = body.sortBy ? { [body.sortBy]: 1 } : { nama: 1 }
+
+    const finalPayload = {
+      ...payload,
+      $or: [
+        { nama: query },
+        { alamat: query },
+        { telepon: query },
+        { _id: query },
+      ],
+    }
+
+    const list = await Pelanggan.find(finalPayload)
       .skip((+body.page - 1) * +body.limit)
       .limit(+body.limit)
       .sort(sortPayload)
-    res.json(list)
+    res.json({ list, total: await Pelanggan.find(finalPayload).countDocuments() })
   } catch (error: any) {
     res.status(500).json({ ok: false, message: error.message })
   }
@@ -66,23 +80,20 @@ interface Query {
 router.post('/search', async (req, res) => {
   try {
     const body = req.body as Query
-    if (+body.query) {
-      const list = await Pelanggan.find({
-        $or: [{ telepon: +body.query }, { _id: +body.query }],
-      })
-        .skip((+body.page - 1) * +body.limit)
-        .limit(+body.limit)
-      res.json(list)
-    } else {
-      const query = new RegExp(body.query, 'i')
-      const list = await Pelanggan.find({
-        $or: [{ nama: query }, { alamat: query }],
-      })
-        .skip((+body.page - 1) * +body.limit)
-        .limit(+body.limit)
 
-      res.json(list)
-    }
+    const query = new RegExp(body.query, 'i')
+    const list = await Pelanggan.find({
+      $or: [
+        { nama: query },
+        { alamat: query },
+        { telepon: query },
+        { _id: query },
+      ],
+    })
+      .skip((+body.page - 1) * +body.limit)
+      .limit(+body.limit)
+
+    res.json(list)
   } catch (error: any) {
     res.status(500).json({ ok: false, message: error.message })
   }

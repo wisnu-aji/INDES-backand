@@ -16,10 +16,10 @@ declare module 'indes-typings' {
   }
 
   export interface PelangganType {
-    _id: number
+    _id: string
     nama: string
     alamat: string
-    telepon: number
+    telepon: string
     paket: number
     pemasangan: Date
     batasPembayaran: Date

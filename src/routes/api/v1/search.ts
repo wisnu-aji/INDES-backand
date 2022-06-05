@@ -15,7 +15,7 @@ router.get('/:id', async (req, res) => {
     return res.json(byId)
   }
 
-  const byPhone = await Pelanggan.findOne({ telepon: +idOrtelepon })
+  const byPhone = await Pelanggan.findOne({ telepon: idOrtelepon })
   if (!byPhone) {
     return res
       .status(404)
