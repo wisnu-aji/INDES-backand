@@ -32,6 +32,9 @@ export const buatSignature = (pelanggan: PelangganType, paket: PaketType) => {
     returnUrl: process.env.URL + '/api/v1/payment/return',
     notifyUrl: process.env.URL + '/api/v1/payment/notify',
     cancelUrl: process.env.URL + '/api/v1/payment/cancel',
+    buyerName: pelanggan.nama,
+    buyerPhone: pelanggan.telepon,
+    buyerEmail: pelanggan._id + '@' + process.env.MAIL || 'wisnuaji.my.id',
     referenceId: pelanggan._id + '-' + (pelanggan.riwayatPembayaran.length + 1),
   }
   const bodyHash = crypto
