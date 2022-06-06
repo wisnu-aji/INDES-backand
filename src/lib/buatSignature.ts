@@ -2,6 +2,7 @@ import crypto from 'crypto'
 import FormData from 'form-data'
 
 import { PelangganType, PaketType } from 'indes-typings'
+import { encrypt } from './cryptr'
 export const buatSignature = (pelanggan: PelangganType, paket: PaketType) => {
   const isProduction = process.env.NODE_ENV === 'production'
 
@@ -35,7 +36,9 @@ export const buatSignature = (pelanggan: PelangganType, paket: PaketType) => {
     buyerName: pelanggan.nama,
     buyerPhone: pelanggan.telepon,
     buyerEmail: pelanggan._id + '@' + process.env.MAIL || 'wisnuaji.my.id',
-    referenceId: pelanggan._id + '-' + (pelanggan.riwayatPembayaran.length + 1),
+    referenceId: encrypt(
+      pelanggan._id + '-' + (pelanggan.riwayatPembayaran.length + 1)
+    ),
   }
   console.log(bodyJSON)
   const bodyHash = crypto
