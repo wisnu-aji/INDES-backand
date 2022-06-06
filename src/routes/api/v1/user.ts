@@ -106,9 +106,9 @@ router.post('/stat', (req, res) => {
     const body = req.body as Stat
     const list =
       body.status === 'telat-bayar'
-        ? { batasPembayaran: { $gt: new Date() } }
-        : body.status === 'sudah-bayar'
         ? { batasPembayaran: { $lte: new Date() } }
+        : body.status === 'sudah-bayar'
+        ? { batasPembayaran: { $gt: new Date() } }
         : {}
     Pelanggan.countDocuments(list, (err, count) => {
       if (err) {
