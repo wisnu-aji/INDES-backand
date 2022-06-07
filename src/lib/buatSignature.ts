@@ -24,6 +24,8 @@ export const buatSignature = (pelanggan: PelangganType, paket: PaketType) => {
     'referenceId',
     pelanggan._id + '-' + (pelanggan.riwayatPembayaran.length + 1)
   )
+  // create md5
+  // const md5 = crypto.createHash('md5').update(process.env.SECRET!)
 
   const bodyJSON = {
     product: [paket.kecepatan],
@@ -36,9 +38,7 @@ export const buatSignature = (pelanggan: PelangganType, paket: PaketType) => {
     buyerName: pelanggan.nama,
     buyerPhone: pelanggan.telepon,
     buyerEmail: pelanggan._id + '@' + process.env.MAIL || 'wisnuaji.my.id',
-    referenceId: encrypt(
-      pelanggan._id + '-' + (pelanggan.riwayatPembayaran.length + 1)
-    ),
+    referenceId: pelanggan._id + '-' + (pelanggan.riwayatPembayaran.length + 1),
   }
   console.log(bodyJSON)
   const bodyHash = crypto
