@@ -31,7 +31,7 @@ export const buatSignature = (pelanggan: PelangganType, paket: PaketType) => {
     product: [paket.kecepatan],
     qty: [1],
     price: [paket.harga],
-    description: ['Pembayaran WiFi'],
+    description: ['Pembayaran WiFi a/n ' + pelanggan.nama],
     returnUrl: process.env.URL + '/api/v1/payment/return',
     notifyUrl: process.env.URL + '/api/v1/payment/notify',
     cancelUrl: process.env.URL + '/api/v1/payment/cancel',
