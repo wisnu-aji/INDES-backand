@@ -3,7 +3,7 @@ import { PaketType, PelangganType } from 'indes-typings'
 import { buatSignature } from './buatSignature'
 
 export const linkBayar = async (pelanggan: PelangganType, paket: PaketType) => {
-  const { signature, bodyJSON, requestBody, vaNumber } = buatSignature(
+  const { signature, bodyJSON, vaNumber } = buatSignature(
     pelanggan,
     paket
   )
