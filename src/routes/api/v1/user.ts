@@ -52,21 +52,26 @@ router.post('/list', async (req, res) => {
 
     const sortPayload = body.sortBy ? { [body.sortBy]: 1 } : { nama: 1 }
 
-    const finalPayload = {
-      ...payload,
-      $or: [
-        { nama: query },
-        { alamat: query },
-        { telepon: query },
-        { _id: query },
-      ],
-    }
+    const finalPayload = !query
+      ? payload
+      : {
+          ...payload,
+          $or: [
+            { nama: query },
+            { alamat: query },
+            { telepon: query },
+            { _id: query },
+          ],
+        }
 
     const list = await Pelanggan.find(finalPayload)
       .skip((+body.page - 1) * +body.limit)
       .limit(+body.limit)
       .sort(sortPayload)
-    res.json({ list, total: await Pelanggan.find(finalPayload).countDocuments() })
+    res.json({
+      list,
+      total: await Pelanggan.find(finalPayload).countDocuments(),
+    })
   } catch (error: any) {
     res.status(500).json({ ok: false, message: error.message })
   }
