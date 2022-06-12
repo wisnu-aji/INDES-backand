@@ -33,4 +33,49 @@ declare module 'indes-typings' {
     expired: Date
     gambar: string
   }
+
+  export interface AvailableBank {
+    bank_code: string
+    collection_type: string
+    transfer_amount: number
+    bank_branch: string
+    account_holder_name: string
+    identity_amount: number
+  }
+
+  export interface AvailableRetailOutlet {
+    retail_outlet_name: string
+  }
+
+  export interface AvailableEwallet {
+    ewallet_type: string
+  }
+
+  export interface AvailableDirectDebit {
+    direct_debit_type: string
+  }
+
+  export interface XenditInvoice {
+    id: string
+    external_id: string
+    user_id: string
+    status: string
+    merchant_name: string
+    merchant_profile_picture_url: string
+    amount: number
+    payer_email: string
+    description: string
+    expiry_date: Date
+    invoice_url: string
+    available_banks: AvailableBank[]
+    available_retail_outlets: AvailableRetailOutlet[]
+    available_ewallets: AvailableEwallet[]
+    available_direct_debits: AvailableDirectDebit[]
+    available_paylaters: any[]
+    should_exclude_credit_card: boolean
+    should_send_email: boolean
+    created: Date
+    updated: Date
+    currency: string
+  }
 }

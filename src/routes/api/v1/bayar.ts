@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { buatSignature } from '../../../lib/buatSignature'
 import { linkBayar } from '../../../lib/linkBayar'
+import { getXenditInvoice } from '../../../lib/xenditInvoice'
 import { Paket } from '../../../models/Paket'
 import { Pelanggan } from '../../../models/Pelanggan'
 
@@ -28,9 +28,19 @@ router.get('/:id', async (req, res) => {
     return
   }
 
-  const bayar = await linkBayar(pelanggan, paket)
+  const bayarFromIPaymu = await linkBayar(pelanggan, paket)
+  const bayarFromXendit = await getXenditInvoice(pelanggan, paket)
 
-  res.redirect(bayar.Data.Url)
+  if (process.env.NODE_ENV === 'development') {
+    const ipaymu = bayarFromIPaymu.Data.Url
+    const xendit = bayarFromXendit.invoice_url
+
+    res.send(
+      `<html><body>Dengan ipaymu: <a href="${ipaymu}">klik di sini</a><br />Dengan xendit: <a href="${xendit}">klik di sini</a></body></html>`
+    )
+  } else {
+    res.redirect(bayarFromXendit.invoice_url)
+  }
 })
 
 export default router
