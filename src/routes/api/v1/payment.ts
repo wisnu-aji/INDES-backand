@@ -3,7 +3,7 @@ import { Router } from 'express'
 const router = Router()
 
 router.post('/notify', async (req, res) => {
-  console.log('/notify: ', req.body)
+  console.log('/notify: ', req.body, req.headers)
   res.json({ ok: true })
 })
 router.post('/cancel', async (req, res) => {
