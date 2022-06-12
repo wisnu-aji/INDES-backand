@@ -57,10 +57,10 @@ router.post('/list', async (req, res) => {
       : {
           ...payload,
           $or: [
-            { nama: query },
-            { alamat: query },
-            { telepon: query },
-            { _id: query },
+            { nama: { $regex: new RegExp(query, 'i') } },
+            { alamat: { $regex: new RegExp(query, 'i') } },
+            { telepon: { $regex: new RegExp(query, 'i') } },
+            { _id: { $regex: new RegExp(query, 'i') } },
           ],
         }
 
