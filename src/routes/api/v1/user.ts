@@ -45,9 +45,9 @@ router.post('/list', async (req, res) => {
     const { query } = body
     const payload =
       body.status === 'telat-bayar'
-        ? { batasPembayaran: { $gt: new Date() } }
-        : body.status === 'sudah-bayar'
         ? { batasPembayaran: { $lte: new Date() } }
+        : body.status === 'sudah-bayar'
+        ? { batasPembayaran: { $gt: new Date() } }
         : {}
 
     const sortPayload = body.sortBy ? { [body.sortBy]: 1 } : { nama: 1 }
