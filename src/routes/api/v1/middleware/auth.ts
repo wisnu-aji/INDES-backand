@@ -55,3 +55,19 @@ export const authAdminUtama = async (
     res.sendStatus(403)
   }
 }
+export const authXendit = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    
+    const callbackToken = req.header('x-callback-token')
+    if(!callbackToken) throw new Error()
+    const isCorrect = callbackToken === process.env.XENDIT_CALLBACK_TOKEN
+    if(!isCorrect) throw new Error()
+    next()
+  } catch (error) {
+    res.sendStatus(403)
+  }
+}

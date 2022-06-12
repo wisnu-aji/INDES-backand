@@ -11,8 +11,9 @@ declare module 'indes-typings' {
     harga: number
   }
   export interface RiwayatPembayaran {
-    tanggal: Date
+    tanggalPembayaran: Date
     jumlahPembayaran: number
+    metodePembayaran: string
   }
 
   export interface PelangganType {
@@ -78,4 +79,26 @@ declare module 'indes-typings' {
     updated: Date
     currency: string
   }
+
+  export interface XenditCallback {
+    id: string;
+    external_id: string;
+    user_id: string;
+    is_high: boolean;
+    payment_method: string;
+    status: string;
+    merchant_name: string;
+    amount: number;
+    paid_amount: number;
+    bank_code: string;
+    paid_at: Date;
+    payer_email: string;
+    description: string;
+    created: Date;
+    updated: Date;
+    currency: string;
+    payment_channel: string;
+    payment_destination: string;
+}
+
 }
