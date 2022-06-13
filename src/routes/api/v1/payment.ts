@@ -21,18 +21,34 @@ router.post('/notify', authIpaymu, async (req, res) => {
     const batasPembayaran = new Date(pelanggan.batasPembayaran)
     const tanggalPemasangan = new Date(pelanggan.pemasangan)
 
-    const batasPembayaranBaru = getBatasPembayaran(batasPembayaran, tanggalPemasangan.getDate())
-    pelanggan.batasPembayaran = batasPembayaranBaru
-    pelanggan.riwayatPembayaran = pelanggan.riwayatPembayaran.concat([
-      {
-        metodePembayaran: body.via,
-        tanggalPembayaran: new Date(body.paid_at),
-        jumlahPembayaran: +body.total,
-      },
-    ])
+    if (pelanggan.riwayatPembayaran.length + 1 === +bulanPembayaran) {
+      const batasPembayaranBaru = getBatasPembayaran(
+        batasPembayaran,
+        tanggalPemasangan.getDate()
+      )
+      pelanggan.batasPembayaran = batasPembayaranBaru
+      pelanggan.riwayatPembayaran = pelanggan.riwayatPembayaran.concat([
+        {
+          metodePembayaran: body.via,
+          tanggalPembayaran: new Date(body.paid_at),
+          jumlahPembayaran: +body.total,
+        },
+      ])
 
-    const pelangganNew = await pelanggan.save()
-    console.log('pelangganUpdate: ', pelangganNew)
+      const pelangganNew = await pelanggan.save()
+      console.log('pelangganUpdate: ', pelangganNew)
+    } else {
+      res
+        .status(500)
+        .json({
+          ok: false,
+          message:
+            'Bulan pembayaran ' +
+            bulanPembayaran +
+            ' tidak sesuai dengan bulan dalam riwayat ' +
+            pelanggan.riwayatPembayaran.length,
+        })
+    }
   }
 
   res.json({ ok: true })
@@ -56,7 +72,10 @@ router.post('/notify/xendit', authXendit, async (req, res) => {
     const batasPembayaran = new Date(pelanggan.batasPembayaran)
     const tanggalPemasangan = new Date(pelanggan.pemasangan)
 
-    const batasPembayaranBaru = getBatasPembayaran(batasPembayaran, tanggalPemasangan.getDate())
+    const batasPembayaranBaru = getBatasPembayaran(
+      batasPembayaran,
+      tanggalPemasangan.getDate()
+    )
     pelanggan.batasPembayaran = batasPembayaranBaru
     pelanggan.riwayatPembayaran = pelanggan.riwayatPembayaran.concat([
       {
