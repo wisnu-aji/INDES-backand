@@ -29,7 +29,7 @@ router.post('/notify', authIpaymu, async (req, res) => {
       pelanggan.riwayatPembayaran = pelanggan.riwayatPembayaran.concat([
         {
           metodePembayaran: body.via,
-          tanggalPembayaran: new Date(body.paid_at),
+          tanggalPembayaran: new Date(),
           jumlahPembayaran: +body.total,
         },
       ])
