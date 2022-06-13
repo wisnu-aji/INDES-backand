@@ -21,7 +21,6 @@ router.post('/notify', authIpaymu, async (req, res) => {
     const batasPembayaran = new Date(pelanggan.batasPembayaran)
     const tanggalPemasangan = new Date(pelanggan.pemasangan)
 
-    if (pelanggan.riwayatPembayaran.length + 1 === +bulanPembayaran) {
       const batasPembayaranBaru = getBatasPembayaran(
         batasPembayaran,
         tanggalPemasangan.getDate()
@@ -37,18 +36,18 @@ router.post('/notify', authIpaymu, async (req, res) => {
 
       const pelangganNew = await pelanggan.save()
       console.log('pelangganUpdate: ', pelangganNew)
-    } else {
-      res
-        .status(500)
-        .json({
-          ok: false,
-          message:
-            'Bulan pembayaran ' +
-            bulanPembayaran +
-            ' tidak sesuai dengan bulan dalam riwayat ' +
-            pelanggan.riwayatPembayaran.length,
-        })
-    }
+      // res
+      //   .status(500)
+      //   .json({
+      //     ok: false,
+      //     message:
+      //       'Bulan pembayaran ' +
+      //       bulanPembayaran +
+      //       ' tidak sesuai dengan bulan dalam riwayat ' +
+      //       pelanggan.riwayatPembayaran.length,
+      //   })
+      //   return
+    
   }
 
   res.json({ ok: true })
