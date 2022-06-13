@@ -41,7 +41,7 @@ jobs:
           # The dokku host to ssh into
           dokku-host: ${{secrets.HOST}}
           # The dokku app name
-          app-name: indes-backend
+          app-name: backend
           # The branch to push on the remote repository (Default: master)
           remote-branch: main # optional, default is master
           # Additional flags to be passed to the git push command. Could be used to force push
