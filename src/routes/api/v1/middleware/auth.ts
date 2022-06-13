@@ -71,3 +71,24 @@ export const authXendit = async (
     res.sendStatus(403)
   }
 }
+
+
+export const authIpaymu = async ( req: Request,
+  res: Response,
+  next: NextFunction) => {
+    try {
+      const body = req.body
+      if(body.reference_id) {
+        const data = decrypt(body.reference_id)
+        if(!data) throw new Error()
+
+        req.body.reference_id = data
+        next()
+      }
+
+      throw new Error()
+    } catch (error) {
+      res.sendStatus(403)
+      
+    }
+  }
