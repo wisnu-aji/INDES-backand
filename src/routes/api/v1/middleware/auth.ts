@@ -61,34 +61,31 @@ export const authXendit = async (
   next: NextFunction
 ) => {
   try {
-    
     const callbackToken = req.header('x-callback-token')
-    if(!callbackToken) throw new Error()
+    if (!callbackToken) throw new Error()
     const isCorrect = callbackToken === process.env.XENDIT_CALLBACK_TOKEN
-    if(!isCorrect) throw new Error()
+    if (!isCorrect) throw new Error()
     next()
   } catch (error) {
     res.sendStatus(403)
   }
 }
 
-
-export const authIpaymu = async ( req: Request,
+export const authIpaymu = async (
+  req: Request,
   res: Response,
-  next: NextFunction) => {
-    try {
-      const body = req.body
-      if(body.reference_id) {
-        const data = decrypt(body.reference_id)
-        if(!data) throw new Error()
+  next: NextFunction
+) => {
+  try {
+    const body = req.body
+    if (!body.reference_id) throw new Error()
+    
+    const data = decrypt(body.reference_id)
+    if (!data) throw new Error()
 
-        req.body.reference_id = data
-        next()
-      }
-
-      throw new Error()
-    } catch (error) {
-      res.sendStatus(403)
-      
-    }
+    req.body.reference_id = data
+    next()
+  } catch (error) {
+    res.sendStatus(403).send()
   }
+}
