@@ -39,7 +39,7 @@ router.get('/:id', async (req, res) => {
       `<html><body>Dengan ipaymu: <a href="${ipaymu}">klik di sini</a><br />Dengan xendit: <a href="${xendit}">klik di sini</a></body></html>`
     )
   } else {
-    res.redirect(bayarFromXendit.invoice_url)
+    res.redirect(bayarFromIPaymu.Data.Url)
   }
 })
 
