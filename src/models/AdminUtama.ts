@@ -5,6 +5,7 @@ const AdminSchema = new Schema<AdminType>({
   email: {
     required: true,
     type: String,
+    unique: true,
   },
   nama: {
     required: true,

@@ -17,6 +17,7 @@ const IklanSchema = new Schema<IklanType>({
   gambar: {
     required: true,
     type: String,
+    unique: true,
   },
 })
 
