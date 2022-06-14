@@ -48,7 +48,7 @@ export const authAdminUtama = async (
     const [email, role] = data.split(':')
     if (role === 'admin-utama') {
       const isAdmin = await AdminUtama.findOne({ email })
-      if (isAdmin) next()
+      if (isAdmin) return next()
     }
     throw new Error()
   } catch (error) {
