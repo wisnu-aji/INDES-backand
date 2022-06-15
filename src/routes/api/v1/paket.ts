@@ -23,6 +23,25 @@ router.post('/add', authAdminUtama, async (req, res) => {
     res.status(500).json({ ok: false, message: error.message })
   }
 })
+router.post('/edit', authAdminUtama, async (req, res) => {
+  try {
+    const data = req.body
+    const result = await Paket.findByIdAndUpdate(data._id, data)
+    res.json(result)
+  } catch (error: any) {
+    res.status(500).json({ ok: false, message: error.message })
+  }
+})
+
+router.delete('/delete', authAdminUtama, async (req, res) => {
+  try {
+    const data = req.body
+    const result = await Paket.findByIdAndDelete(data._id)
+    res.json(result)
+  } catch (error: any) {
+    res.status(500).json({ ok: false, message: error.message })
+  }
+})
 
 router.get('/:id', async (req, res) => {
   try {
