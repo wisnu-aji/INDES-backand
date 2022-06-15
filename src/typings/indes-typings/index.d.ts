@@ -2,7 +2,7 @@ declare module 'indes-typings' {
   export interface AdminType {
     _id: number
     email: string
-    nama: string
+    name: string
   }
 
   export interface PaketType {

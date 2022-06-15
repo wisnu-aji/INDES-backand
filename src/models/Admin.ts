@@ -7,7 +7,7 @@ const AdminSchema = new Schema<AdminType>({
     type: String,
     unique: true,
   },
-  nama: {
+  name: {
     required: true,
     type: String,
   },
