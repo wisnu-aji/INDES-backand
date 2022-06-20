@@ -20,7 +20,7 @@ router.post('/add', authAdmin, async (req, res) => {
     res.status(500).json({ message: e.message })
   }
 })
-router.put('/edit', authAdmin, async (req, res) => {
+router.patch('/edit', authAdmin, async (req, res) => {
   try {
     const data = req.body
     const iklan = await Iklan.findByIdAndUpdate(data._id, data)

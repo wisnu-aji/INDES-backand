@@ -23,7 +23,7 @@ router.post('/add', authAdminUtama, async (req, res) => {
     res.status(500).json({ ok: false, message: error.message })
   }
 })
-router.post('/edit', authAdminUtama, async (req, res) => {
+router.patch('/edit', authAdminUtama, async (req, res) => {
   try {
     const data = req.body
     const result = await Paket.findByIdAndUpdate(data._id, data)
