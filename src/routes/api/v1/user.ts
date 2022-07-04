@@ -37,17 +37,25 @@ interface List {
   sortBy: 'nama' | 'alamat' | 'telepon' | null
   status: 'telat-bayar' | 'sudah-bayar' | null
   query: string
+  from?: string
+  to?: string
 }
 
 router.post('/list', async (req, res) => {
   try {
     const body = req.body as List
     const { query } = body
+    const payloadFromTo =
+      body.from && body.to
+        ? { $gte: new Date(body.from), $lte: new Date(body.to) }
+        : {}
     const payload =
       body.status === 'telat-bayar'
-        ? { batasPembayaran: { $lte: new Date() } }
+        ? { batasPembayaran: { $lt: new Date(), ...payloadFromTo } }
         : body.status === 'sudah-bayar'
-        ? { batasPembayaran: { $gt: new Date() } }
+        ? { batasPembayaran: { $gt: new Date(), ...payloadFromTo } }
+        : body.from && body.to
+        ? { batasPembayaran: payloadFromTo }
         : {}
 
     const sortPayload = body.sortBy ? { [body.sortBy]: 1 } : { nama: 1 }
