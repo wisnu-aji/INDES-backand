@@ -4,7 +4,15 @@ import { Pelanggan } from '../../../models/Pelanggan'
 const router = Router()
 
 router.get('/:id', async (req, res) => {
-  const idOrtelepon = req.params.id
+  const auth = req.headers.authorization
+  if (!auth) {
+    return res.status(401).json({
+      message: 'Unauthorized',
+    })
+  }
+  const [, token] = auth.split(' ')
+  const { id } = req.params
+  const idOrtelepon = req.params.id as string
   if (!Number(idOrtelepon))
     return res
       .status(406)
@@ -12,7 +20,12 @@ router.get('/:id', async (req, res) => {
 
   const byId = await Pelanggan.findById(+idOrtelepon)
   if (byId) {
-    return res.json(byId)
+    if (byId.password === token) {
+      return res.json(byId)
+    }
+    return res.status(401).json({
+      message: 'Unauthorized',
+    })
   }
 
   const byPhone = await Pelanggan.findOne({ telepon: idOrtelepon })
@@ -21,8 +34,12 @@ router.get('/:id', async (req, res) => {
       .status(404)
       .json({ ok: false, message: "Id / telepon ins't found" })
   }
-
-  return res.json(byPhone)
+  if (byPhone.password === token) {
+    return res.json(byPhone)
+  }
+  return res.status(401).json({
+    message: 'Unauthorized',
+  })
 })
 
 export default router
